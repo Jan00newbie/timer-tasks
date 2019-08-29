@@ -1,0 +1,68 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+html,
+body {
+  width: 100%;
+  height: 100%; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
+
+.base {
+  background-color: #4d0453;
+  color: #f89900; }
+
+.reverse {
+  background-color: #f89900;
+  color: #4d0453; }
+
+.app {
+  padding: 1em;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 1.5em;
+  margin-top: 3em; }
+  .app .task-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1em; }
+  .app .task {
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 1em;
+    text-align: left;
+    display: grid;
+    grid-template: "title clock clock" "time clock clock" "start start start";
+    line-height: 30px; }
+    .app .task .task__title {
+      grid-area: title; }
+    .app .task .task__time {
+      grid-area: time; }
+    .app .task .task__clock {
+      grid-area: clock; }
+    .app .task .task__button {
+      grid-area: start;
+      border-radius: 0.7em;
+      padding: 0.5em; }
+  .app .task-list__add {
+    width: 3em;
+    height: 3em; }
+
+.circle {
+  border-radius: 50%; }
+
+button {
+  border: none;
+  cursor: pointer; }
+
+button:focus {
+  outline: none; }

@@ -7,14 +7,14 @@ class TimerDashboard extends Component {
         super(props)
         this.state={
             timers:[
-                {"id":1,"title":"Recruiting Manager","category":"n/a","time":"57300"},
-                {"id":2,"title":"Statistician I","category":"n/a","time":"7332"},
-                {"id":3,"title":"Administrative Officer","category":"Capital Goods","time":"0"},
-                {"id":4,"title":"Analog Circuit Design manager","category":"n/a","time":"27156"},
-                {"id":5,"title":"Paralegal","category":"Health Care","time":"49330"},
-                {"id":6,"title":"Biostatistician III","category":"Consumer Services","time":"11641"},
-                {"id":7,"title":"Account Representative I","category":"Basic Industries","time":"5"},
-                {"id":8,"title":"Sales Associate","category":"Consumer Services","time":"288"},
+                {"id":1,"title":"Recruiting Manager","category":"n/a","time":57300},
+                {"id":2,"title":"Statistician I","category":"n/a","time":7332},
+                {"id":3,"title":"Administrative Officer","category":"Capital Goods","time":0},
+                {"id":4,"title":"Analog Circuit Design manager","category":"n/a","time":27156},
+                {"id":5,"title":"Paralegal","category":"Health Care","time":49330},
+                {"id":6,"title":"Biostatistician III","category":"Consumer Services","time":11641},
+                {"id":7,"title":"Account Representative I","category":"Basic Industries","time":5},
+                {"id":8,"title":"Sales Associate","category":"Consumer Services","time":288},
             ]}
     }
 
@@ -38,10 +38,7 @@ class TimerDashboard extends Component {
     }
 
     deleteTimer = timerId => {
-        
-        const timersTemp = [...this.state.timers].splice(timerId)
-
-        this.setState({timers: timersTemp})
+        this.setState({timers: this.state.timers.filter(timer => timer.id !== timerId)})
     }
 
     onCreateHandler = timer => {
@@ -56,16 +53,17 @@ class TimerDashboard extends Component {
         this.deleteTimer(timerId)
     }
 
-
     render() {
         return (
             <div className="timer-dashboard">
                 <EditableTimerList 
                     timers={this.state.timers} 
-                    onEditHandler={this.onEditHandler}/>
+                    onDeleteHandler={this.onDeleteHandler}
+                    onEditHandler={this.onEditHandler}
+                    />
                 <ToggleableTimerForm 
                     onCreateHandler={this.onCreateHandler}
-                    onEditHandler={this.onDeleteHandler}/>
+                    />
             </div>
         )
     }

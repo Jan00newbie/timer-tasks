@@ -8,7 +8,7 @@ const timer = props => {
             
             <button>Start</button>
             <button onClick={props.onEditClick}>Edit</button>
-            <button onClick={() => props.onDeleteClick(props.id)}>Delete</button>
+            <button onClick={()=>props.onDeleteClick(props.id)}>Delete</button>
 
         </div>
     )

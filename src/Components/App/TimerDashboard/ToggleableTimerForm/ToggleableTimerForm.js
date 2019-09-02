@@ -27,7 +27,8 @@ export class ToggleableTimerForm extends Component {
         const child = (this.state.isFormOpen) 
             ? <TimerForm 
                 onFormSubmit={this.createHandler}
-                onCancelClickHandler={this.closeFormHandle}/> 
+                onCancelClick={this.closeFormHandle}
+                /> 
             : <AddTimerButton onAddClickHandler={this.openFormHandle}/>
 
         return (

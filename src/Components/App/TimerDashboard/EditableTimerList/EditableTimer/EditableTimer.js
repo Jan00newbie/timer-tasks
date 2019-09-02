@@ -24,6 +24,7 @@ class EditableTimer extends Component {
     }
 
     render() {
+
         const child = (this.state.isFormOpen) 
             ? <TimerForm 
                 id={this.props.id}
@@ -34,6 +35,7 @@ class EditableTimer extends Component {
 
             : <Timer
                 id={this.props.id}
+                time={this.props.time}
                 title={this.props.title} 
                 category={this.props.category} 
                 onEditClick={this.openFormHandle}

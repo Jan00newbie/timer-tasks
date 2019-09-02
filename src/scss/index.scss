@@ -1,6 +1,62 @@
-*{
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+$shadow: 0 2px 8px 0px rgba($color: #000000, $alpha: 0.1);
+$radius:5px;
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+.timer-form {
+  display: grid;
+  grid-gap:5px;
+}
+
+button {
+  outline: none;
+  padding: 0.5em;
+  background: none;
+  border: none;
+  border-radius: $radius;
+  background-color: lightblue;
+  opacity: .5;
+  cursor: pointer;
+  max-width: 5em;
+  display: inline;
+}
+
+input[type=text]{
+  padding:10px;
+  border: 0.1px solid rgba($color: #000000, $alpha: 0.1);
+}
+button:hover{
+  opacity: 1;
+}
+
+.editable-timer {
+  background-color: white;
+  box-shadow: $shadow;
+  padding: 10px;
+  border-radius: $radius;
+}
+
+.editable-timer-list,
+.timer-dashboard {
+  display: grid;
+  grid-gap: 10px;
+}
+
+.timer-dashboard {
+  padding: 10px;
+  width: 400px;
+  margin: 0 auto;
+}
+
+.container{
+  padding: 10px;
+  box-shadow: $shadow;
+}

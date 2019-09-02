@@ -6,7 +6,9 @@ const timer = props => {
             <h3>{props.title}</h3>
             <p>{props.category}</p>
             
-            <button>Start</button><button onClick={props.onEditClickHandler}>Edit</button><button>Delete</button>
+            <button>Start</button>
+            <button onClick={props.onEditClick}>Edit</button>
+            <button onClick={() => props.onDeleteClick(props.id)}>Delete</button>
 
         </div>
     )

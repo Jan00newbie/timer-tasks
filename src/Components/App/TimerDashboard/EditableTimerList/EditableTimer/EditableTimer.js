@@ -18,23 +18,26 @@ class EditableTimer extends Component {
         })
     }
 
-    submitHandle = (timerData) =>{
-        this.props.onEditFormSubmit(timerData);
-        this.closeFormHandle();
+    submitHandle = timerData =>{
+        this.props.onEditHandler(timerData)
+        this.closeFormHandle()
     }
 
     render() {
         const child = (this.state.isFormOpen) 
             ? <TimerForm 
+                id={this.props.id}
                 title={this.props.title} 
                 category={this.props.category} 
-                onSubmitClickHandler={this.submitHandle}
-                onCancelClickHandler={this.closeFormHandle}/> 
+                onFormSubmit={this.submitHandle}
+                onCancelClick={this.closeFormHandle}/> 
 
-            : <Timer 
+            : <Timer
+                id={this.props.id}
                 title={this.props.title} 
                 category={this.props.category} 
-                onEditClickHandler={this.openFormHandle}/>
+                onEditClick={this.openFormHandle}
+                onDeleteClick={this.props.onDeleteHandler}/>
 
         return (
             <div className="container">

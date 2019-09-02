@@ -18,22 +18,54 @@ class TimerDashboard extends Component {
             ]}
     }
 
-    onEditHandler
+    editTimer = editedTimer => {
+        this.setState({
+            timers: this.state.timers.map( timer =>
+                (timer.id === editedTimer.id) 
+                ? Object.assign(timer, {
+                    title: editedTimer.title,
+                    category: editedTimer.category
+                  }) 
+                : timer
+            )
+        })
+    }
 
+    createTimer(timer) {
+        this.setState({
+            timers: this.state.timers.concat(new Timer(timer))
+        })
+    }
 
-    onCreateHandler = (timer) => {
+    deleteTimer = timerId => {
+        
+        const timersTemp = [...this.state.timers].splice(timerId)
+
+        this.setState({timers: timersTemp})
+    }
+
+    onCreateHandler = timer => {
         this.createTimer(timer)
     }
 
-    createTimer(timer){
-        this.setState({timers: this.state.timers.concat( new Timer(timer))})
+    onEditHandler = editedTimer => {
+        this.editTimer(editedTimer)
     }
+
+    onDeleteHandler = timerId => {
+        this.deleteTimer(timerId)
+    }
+
 
     render() {
         return (
             <div className="timer-dashboard">
-                <EditableTimerList timers={this.state.timers}/>
-                <ToggleableTimerForm />
+                <EditableTimerList 
+                    timers={this.state.timers} 
+                    onEditHandler={this.onEditHandler}/>
+                <ToggleableTimerForm 
+                    onCreateHandler={this.onCreateHandler}
+                    onEditHandler={this.onDeleteHandler}/>
             </div>
         )
     }

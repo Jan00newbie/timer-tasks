@@ -19,12 +19,6 @@ class TimerDashboard extends Component {
     }
 
     editTimer = editedTimer => {
-        setInterval(()=>{
-            // this.setState({this.state.timers.filter(timer => timer.id !== timerId)})
-        }, 100)
-    }
-
-    startTimer = timerId => {
         this.setState({
             timers: this.state.timers.map( timer =>
                 (timer.id === editedTimer.id) 
@@ -57,10 +51,6 @@ class TimerDashboard extends Component {
 
     onDeleteHandler = timerId => {
         this.deleteTimer(timerId)
-    }
-
-    onStartHandler = timerId => {
-        this.startTimer(timerId)
     }
 
     render() {

@@ -7,7 +7,7 @@ class TimerDashboard extends Component {
         super(props)
         this.state={
             timers:[
-                {"id":1,"title":"Recruiting Manager","category":"n/a","time":0, runningSince:null},
+                {"id":1,"title":"Recruiting Manager","category":"n/a","time":0, runningSince:false},
                 {"id":2,"title":"Statistician I","category":"n/a","time":0, runningSince:null},
                 {"id":3,"title":"Administrative Officer","category":"Capital Goods","time":0, runningSince:null},
                 {"id":4,"title":"Analog Circuit Design manager","category":"n/a","time":0, runningSince:null},
@@ -41,6 +41,21 @@ class TimerDashboard extends Component {
         this.setState({timers: this.state.timers.filter(timer => timer.id !== timerId)})
     }
 
+    startTimer = timerId => {
+        const now = Date.now()
+
+        this.setState({
+            timers: this.state.timers.map( timer =>
+                (timer.id === timerId) 
+                    ? Object.assign(timer, {
+                        runningSince: now
+                    }) 
+                    : timer
+            )
+        })
+    }
+
+
     onCreateHandler = timer => {
         this.createTimer(timer)
     }
@@ -53,6 +68,14 @@ class TimerDashboard extends Component {
         this.deleteTimer(timerId)
     }
 
+    onStartHandler = timerId => {
+        this.startTimer(timerId)
+    }
+
+    onStopHandler = timerId => {
+        this.stopTimer(timerId)
+    }
+
     render() {
         return (
             <div className="timer-dashboard">
@@ -61,6 +84,7 @@ class TimerDashboard extends Component {
                     onDeleteHandler={this.onDeleteHandler}
                     onEditHandler={this.onEditHandler}
                     onStartHandler={this.onStartHandler}
+                    onStopHandler={this.onStopHandler}
                     />
                 <ToggleableTimerForm 
                     onCreateHandler={this.onCreateHandler}

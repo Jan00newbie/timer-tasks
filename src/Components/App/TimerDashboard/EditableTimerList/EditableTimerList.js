@@ -12,7 +12,8 @@ const editableTimerList = props =>
                 category={timer.category}
                 onEditHandler={props.onEditHandler}
                 onDeleteHandler={props.onDeleteHandler}
-                onStartHandler={props.onStartHandler}/>)}
+                onStartHandler={props.onStartHandler}
+                onStopHandler={props.onStopHandler}/>)}
     </div>
 
 export default editableTimerList

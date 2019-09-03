@@ -18,7 +18,7 @@ export class ToggleableTimerForm extends Component {
         })
     }
 
-    createHandler = (timerData) => {
+    createHandler = timerData => {
         this.props.onCreateHandler(timerData);
         this.closeFormHandle();
     }

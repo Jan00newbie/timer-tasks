@@ -40,7 +40,8 @@ class EditableTimer extends Component {
                 category={this.props.category} 
                 onEditClick={this.openFormHandle}
                 onDeleteClick={this.props.onDeleteHandler}
-                onStartClick={this.props.onStartHandler}/>
+                onStartClick={this.props.onStartHandler}
+                onStopClick={this.props.onStopHandler}/>
 
         return (
             <div className="container">

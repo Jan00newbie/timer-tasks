@@ -1,17 +1,32 @@
-import React from 'react'
+import React, { Component } from 'react'
+import TimerActionButton from '.'
 
-const timer = props => {
-    return (
-        <div className="timer">
-            <h3>{props.title}</h3>
-            <p>{props.category}</p>
-            
-            <button>Start</button>
-            <button onClick={props.onEditClick}>Edit</button>
-            <button onClick={()=>props.onDeleteClick(props.id)}>Delete</button>
+export class Timer extends Component {
 
-        </div>
-    )
+    componentDidMount() {
+        this.forceUpdateInterval = setInterval(() => this.forceUpdate(), 50);
+    }
+    componentWillUnmount() {
+        clearInterval(this.forceUpdateInterval);
+    }
+
+    render() {
+        return (
+            <div className="timer">
+                <h3>{this.props.title}</h3>
+                <p>{this.props.category}</p>
+                <TimerActionButton
+                    timerIsRunning={!!this.props.runningSince}
+                    onStartClick={this.handleStartClick}
+                    onStopClick={this.handleStopClick}
+                    />
+
+                <button onClick={this.props.onStartClick}>Start</button>
+                <button onClick={()=>this.props.onEditClick(this.props.id)}>Edit</button>
+                <button onClick={()=>this.props.onDeleteClick(this.props.id)}>Delete</button>
+            </div>
+        )
+    }
 }
 
-export default timer
+export default Timer

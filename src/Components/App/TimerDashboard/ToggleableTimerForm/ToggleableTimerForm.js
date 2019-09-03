@@ -6,19 +6,19 @@ import TimerForm from '../EditableTimerList/EditableTimer/TimerForm/TimerForm'
 export class ToggleableTimerForm extends Component {
     state={isFormOpen:false}
 
-    closeFormHandle = () =>{
+    closeFormHandle = () => {
         this.setState({
             isFormOpen: false
         })
     }
 
-    openFormHandle = () =>{
+    openFormHandle = () => {
         this.setState({
             isFormOpen: true
         })
     }
 
-    createHandler = (timerData) =>{
+    createHandler = (timerData) => {
         this.props.onCreateHandler(timerData);
         this.closeFormHandle();
     }

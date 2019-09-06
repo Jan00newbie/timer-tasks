@@ -9,13 +9,13 @@ class TimerDashboard extends Component {
         this.state={
             timers:[
                 {"id":1,"title":"Recruiting Manager","category":"n/a","time":0, runningSince:false},
-                {"id":2,"title":"Statistician I","category":"n/a","time":0, runningSince:null},
-                {"id":3,"title":"Administrative Officer","category":"Capital Goods","time":0, runningSince:null},
-                {"id":4,"title":"Analog Circuit Design manager","category":"n/a","time":0, runningSince:null},
-                {"id":5,"title":"Paralegal","category":"Health Care","time":0, runningSince:null},
-                {"id":6,"title":"Biostatistician III","category":"Consumer Services","time":0, runningSince:null},
-                {"id":7,"title":"Account Representative I","category":"Basic Industries","time":0, runningSince:null},
-                {"id":8,"title":"Sales Associate","category":"Consumer Services","time":0, runningSince:null},
+                // {"id":2,"title":"Statistician I","category":"n/a","time":0, runningSince:null},
+                // {"id":3,"title":"Administrative Officer","category":"Capital Goods","time":0, runningSince:null},
+                // {"id":4,"title":"Analog Circuit Design manager","category":"n/a","time":0, runningSince:null},
+                // {"id":5,"title":"Paralegal","category":"Health Care","time":0, runningSince:null},
+                // {"id":6,"title":"Biostatistician III","category":"Consumer Services","time":0, runningSince:null},
+                // {"id":7,"title":"Account Representative I","category":"Basic Industries","time":0, runningSince:null},
+                // {"id":8,"title":"Sales Associate","category":"Consumer Services","time":0, runningSince:null},
             ]}
     }
 
@@ -50,6 +50,21 @@ class TimerDashboard extends Component {
                 (timer.id === timerId) 
                     ? Object.assign(timer, {
                         runningSince: now
+                    }) 
+                    : timer
+            )
+        })
+    }
+
+    stopTimer = timerId => {
+        const now = Date.now()
+        
+        this.setState({
+            timers: this.state.timers.map( timer =>
+                (timer.id === timerId) 
+                    ? Object.assign(timer, {
+                        runningSince: null,
+                        time: timer.time + (now - timer.runningSince)
                     }) 
                     : timer
             )

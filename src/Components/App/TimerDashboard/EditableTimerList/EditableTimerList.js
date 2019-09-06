@@ -8,6 +8,7 @@ const editableTimerList = props =>
                 key={timer.id}
                 id={timer.id}
                 time={timer.time}
+                runningSince={timer.runningSince}
                 title={timer.title}
                 category={timer.category}
                 onEditHandler={props.onEditHandler}

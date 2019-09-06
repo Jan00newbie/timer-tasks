@@ -36,7 +36,8 @@ class EditableTimer extends Component {
             : <Timer
                 id={this.props.id}
                 time={this.props.time}
-                title={this.props.title} 
+                title={this.props.title}
+                runningSince={this.props.runningSince}
                 category={this.props.category} 
                 onEditClick={this.openFormHandle}
                 onDeleteClick={this.props.onDeleteHandler}

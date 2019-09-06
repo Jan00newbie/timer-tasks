@@ -1,23 +1,27 @@
 import React, { Component } from 'react'
 import TimerActionButton from './TimerActionButton/TimerActionButton'
-
+import timeConverter from '../../../../../Utils/util'
 
 export class Timer extends Component {
 
     componentDidMount() {
         this.forceUpdateInterval = setInterval(() => {
-            this.forceUpdate()}, 50)
+            this.forceUpdate()
+        }, 50)
     }
     componentWillUnmount() {
         clearInterval(this.forceUpdateInterval);
     }
 
     render() {
+
+        console.log(this.props.time);
+        
         return (
             <div className="timer">
                 <h3>{this.props.title}</h3>
                 <p>{this.props.category}</p>
-
+                <p>{timeConverter(this.props.time)}</p>
                 <TimerActionButton
                     timerIsRunning={!!this.props.runningSince}
                     onStartClick={()=>this.props.onStartClick(this.props.id)}

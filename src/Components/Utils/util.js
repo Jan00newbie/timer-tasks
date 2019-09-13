@@ -1,8 +1,11 @@
 
 
 const msToTime = ms => {
-    const sec = ms / 1000
-    return `${Math.floor(sec / 60 / 60) } : ${Math.floor(sec / 60)} : ${Math.floor(sec)}`
+    const hours = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60))
+    const seconds = Math.floor((ms % (1000 * 60)) / 1000)
+
+    return `${hours}h : ${minutes}m : ${seconds}s`
 }
 
 export default msToTime

@@ -14,9 +14,6 @@ export class Timer extends Component {
     }
 
     render() {
-
-        console.log(this.props.time);
-        
         return (
             <div className="timer">
                 <h3>{this.props.title}</h3>

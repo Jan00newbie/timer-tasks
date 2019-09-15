@@ -18,22 +18,18 @@ export class GQL {
             .then(result => result.data);
     }
     async fetchAll() {
-        const {
-            timers
-        } = await this.sendRequest(`query{
+        const {timers} = await this.sendRequest(`query{
         timers{${this.timerSchema}}
     }`);
         return timers;
     }
     async editTimer(editedTimer) {
-        const {
-            updateTimer
-        } = await this.sendRequest(`
-        mutation{
-            updateTimer(
-                updateTimerInput:{ _id: "${editedTimer.id}", title: "${editedTimer.title}", category: "${editedTimer.category}"}){
-                    ${this.timerSchema}
-                }
+        const {updateTimer} = await this.sendRequest(`
+            mutation{
+                updateTimer(
+                    updateTimerInput:{ _id: "${editedTimer.id}", title: "${editedTimer.title}", category: "${editedTimer.category}"}){
+                        ${this.timerSchema}
+                    }
             }`);
         return updateTimer;
     }

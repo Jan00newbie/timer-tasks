@@ -1,76 +1,68 @@
-import React, { Component } from 'react'
+import React, {
+    Component
+} from 'react'
 import EditableTimerList from './EditableTimerList/EditableTimerList'
 import ToggleableTimerForm from './ToggleableTimerForm/ToggleableTimerForm'
+import {
+    GQL
+} from '../../Utils/GQL'
+
+const gql = new GQL()
 
 class TimerDashboard extends Component {
-    constructor(props){
-        
-        super(props)
-        this.state={
-            timers:[
-                {"id":1,"title":"Recruiting Manager","category":"n/a","time":0, runningSince:false},
-                {"id":2,"title":"Statistician I","category":"n/a","time":0, runningSince:null},
-                {"id":3,"title":"Administrative Officer","category":"Capital Goods","time":0, runningSince:null},
-                {"id":4,"title":"Analog Circuit Design manager","category":"n/a","time":0, runningSince:null},
-                {"id":5,"title":"Paralegal","category":"Health Care","time":0, runningSince:null},
-                {"id":6,"title":"Biostatistician III","category":"Consumer Services","time":0, runningSince:null},
-                {"id":7,"title":"Account Representative I","category":"Basic Industries","time":0, runningSince:null},
-                {"id":8,"title":"Sales Associate","category":"Consumer Services","time":0, runningSince:null},
-            ]}
+
+    state = {
+        timers: []
     }
 
-    editTimer = editedTimer => {
+    async componentDidMount() {
         this.setState({
-            timers: this.state.timers.map( timer =>
-                (timer.id === editedTimer.id) 
-                ? Object.assign(timer, {
-                    title: editedTimer.title,
-                    category: editedTimer.category
-                  }) 
-                : timer
+            timers: await gql.fetchAll()
+        })
+    }
+
+    updateTimer(updatedTimerId, updatedTimer){
+        this.setState({
+            timers: this.state.timers.map(timer =>
+                (timer.id === updatedTimerId) 
+                    ? updatedTimer 
+                    : timer
             )
         })
     }
 
-    createTimer(timer) {
+    editTimer = async editedTimer => {
+        const updatedTimer = await gql.editTimer(editedTimer)
+
+        this.updateTimer(editedTimer.id, updatedTimer)
+    }
+
+    createTimer = async timer => {
+        const createdTimer = gql.createTimer(timer)
+
         this.setState({
-            timers: this.state.timers.concat(new Timer(timer))
+            timers: this.state.timers.concat(createdTimer)
         })
     }
 
     deleteTimer = timerId => {
-        this.setState({timers: this.state.timers.filter(timer => timer.id !== timerId)})
-    }
-
-    startTimer = timerId => {
-        const now = Date.now()
-
         this.setState({
-            timers: this.state.timers.map( timer =>
-                (timer.id === timerId) 
-                    ? Object.assign(timer, {
-                        runningSince: now
-                    }) 
-                    : timer
-            )
+            timers: this.state.timers.filter(timer => timer.id !== timerId)
         })
     }
 
-    stopTimer = timerId => {
-        const now = Date.now()
+    startTimer = async timerId => {
         
-        this.setState({
-            timers: this.state.timers.map( timer =>
-                (timer.id === timerId) 
-                    ? Object.assign(timer, {
-                        runningSince: null,
-                        time: timer.time + (now - timer.runningSince)
-                    }) 
-                    : timer
-            )
-        })
+        const updatedTimer = await gql.startTimer(timerId)
+
+        this.updateTimer(timerId, updatedTimer)
     }
 
+    stopTimer = async timerId => {
+        const updatedTimer = await gql.stopTimer(timerId)
+
+        this.updateTimer(timerId, updatedTimer)
+    }
 
     onCreateHandler = timer => {
         this.createTimer(timer)
@@ -107,14 +99,6 @@ class TimerDashboard extends Component {
                     />
             </div>
         )
-    }
-}
-
-class Timer {
-    constructor(timer) {
-        this.title = timer.title
-        this.category = timer.category
-        this.id = Math.floor(Math.random() * 1000)
     }
 }
 

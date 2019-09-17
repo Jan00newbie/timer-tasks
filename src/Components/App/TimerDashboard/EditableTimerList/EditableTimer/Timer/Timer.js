@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TimerActionButton from './TimerActionButton/TimerActionButton'
-import timeConverter, {calcTimer} from '../../../../../Utils/util'
+import timeConverter from '../../../../../Utils/util'
 
 
 export class Timer extends Component {
@@ -18,7 +18,7 @@ export class Timer extends Component {
         const elapsed = this.props.runningSince 
             ? Date.now() - this.props.runningSince + this.props.time
             : this.props.time
-console.log(elapsed)
+
         return (
             <div className="timer">
                 <h3>{this.props.title}</h3>

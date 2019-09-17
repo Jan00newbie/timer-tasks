@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import TimerActionButton from './TimerActionButton/TimerActionButton'
-import timeConverter from '../../../../../Utils/util'
+import timeConverter, {calcTimer} from '../../../../../Utils/util'
+
 
 export class Timer extends Component {
-
     componentDidMount() {
         this.forceUpdateInterval = setInterval(() => {
             this.forceUpdate()
@@ -15,13 +15,15 @@ export class Timer extends Component {
 
     render() {
 
-        console.log(this.props.time);
-        
+        const elapsed = this.props.runningSince 
+            ? Date.now() - this.props.runningSince + this.props.time
+            : this.props.time
+console.log(elapsed)
         return (
             <div className="timer">
                 <h3>{this.props.title}</h3>
                 <p>{this.props.category}</p>
-                <p>{timeConverter(this.props.time)}</p>
+                <p>{timeConverter(elapsed)}</p>
                 <TimerActionButton
                     timerIsRunning={!!this.props.runningSince}
                     onStartClick={()=>this.props.onStartClick(this.props.id)}

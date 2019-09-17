@@ -21,16 +21,20 @@ class TimerDashboard extends Component {
         })
     }
 
+    updateTimer(updatedTimerId, updatedTimer){
+        this.setState({
+            timers: this.state.timers.map(timer =>
+                (timer.id === updatedTimerId) 
+                    ? updatedTimer 
+                    : timer
+            )
+        })
+    }
+
     editTimer = async editedTimer => {
         const updatedTimer = await gql.editTimer(editedTimer)
 
-        this.setState({
-            timers: this.state.timers.map(timer =>
-                (timer.id === editedTimer.id) 
-                    ?updatedTimer 
-                    :timer
-            )
-        })
+        this.updateTimer(editedTimer.id, updatedTimer)
     }
 
     createTimer = async timer => {
@@ -48,30 +52,16 @@ class TimerDashboard extends Component {
     }
 
     startTimer = async timerId => {
-        const now = Date.now()
+        
+        const updatedTimer = await gql.startTimer(timerId)
 
-        this.setState({
-            timers: this.state.timers.map(timer =>
-                (timer.id === timerId) 
-                    ? Object.assign(timer, {runningSince: now}) 
-                    : timer
-            )
-        })
+        this.updateTimer(timerId, updatedTimer)
     }
 
     stopTimer = async timerId => {
-        const now = Date.now()
+        const updatedTimer = await gql.stopTimer(timerId)
 
-        this.setState({
-            timers: this.state.timers.map(timer =>
-                (timer.id === timerId) ?
-                Object.assign(timer, {
-                    runningSince: null,
-                    time: timer.time + (now - timer.runningSince)
-                }) :
-                timer
-            )
-        })
+        this.updateTimer(timerId, updatedTimer)
     }
 
     onCreateHandler = timer => {

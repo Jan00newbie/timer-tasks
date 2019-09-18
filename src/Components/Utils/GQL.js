@@ -57,14 +57,15 @@ export class GQL {
                 startTimer( _id: "${timerId}" ){
                     ${this.timerSchema}
                 }
-            }`);
-
+            }`)
+        
         return startTimer
     }
     async stopTimer(timerId) {
+        console.log("XD")
         const {stopTimer} = await this.sendRequest(`
             mutation{
-                startTimer( _id: ${timerId} ){
+                stopTimer( _id: "${timerId}" ){
                     ${this.timerSchema}
                 }
             }`);

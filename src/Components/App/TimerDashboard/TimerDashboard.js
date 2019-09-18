@@ -24,8 +24,8 @@ class TimerDashboard extends Component {
     updateTimer(updatedTimerId, updatedTimer){
         this.setState({
             timers: this.state.timers.map(timer =>
-                (timer.id === updatedTimerId) 
-                    ? updatedTimer 
+                (timer.id === updatedTimerId)
+                    ? updatedTimer
                     : timer
             )
         })
@@ -54,7 +54,7 @@ class TimerDashboard extends Component {
     startTimer = async timerId => {
         
         const updatedTimer = await gql.startTimer(timerId)
-
+        console.log(updatedTimer)
         this.updateTimer(timerId, updatedTimer)
     }
 

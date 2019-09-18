@@ -18,6 +18,7 @@ export class Timer extends Component {
         const elapsed = this.props.runningSince 
             ? Date.now() - this.props.runningSince + this.props.time
             : this.props.time
+            
 
         return (
             <div className="timer">

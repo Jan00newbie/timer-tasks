@@ -62,7 +62,6 @@ export class GQL {
         return startTimer
     }
     async stopTimer(timerId) {
-        console.log("XD")
         const {stopTimer} = await this.sendRequest(`
             mutation{
                 stopTimer( _id: "${timerId}" ){

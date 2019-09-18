@@ -52,9 +52,8 @@ class TimerDashboard extends Component {
     }
 
     startTimer = async timerId => {
-        
         const updatedTimer = await gql.startTimer(timerId)
-        console.log(updatedTimer)
+
         this.updateTimer(timerId, updatedTimer)
     }
 

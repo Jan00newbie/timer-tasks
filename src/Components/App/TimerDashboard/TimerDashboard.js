@@ -46,9 +46,13 @@ class TimerDashboard extends Component {
     }
 
     deleteTimer = timerId => {
-        this.setState({
-            timers: this.state.timers.filter(timer => timer.id !== timerId)
-        })
+        const result = gql.deleteTimer(timerId)
+
+        if(result){
+            this.setState({
+                timers: this.state.timers.filter(timer => timer.id !== timerId)
+            })
+        }
     }
 
     startTimer = async timerId => {

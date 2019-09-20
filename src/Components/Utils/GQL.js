@@ -51,6 +51,14 @@ export class GQL {
         return createTimer;
     }
 
+    async deleteTimer(timerId) {
+        const {deleteTimer} = await this.sendRequest(`
+            mutation{
+                deleteTimer( _id: "${timerId}" )
+                }`);
+        return deleteTimer;
+    }
+
     async startTimer(timerId) {
         const {startTimer} = await this.sendRequest(`
             mutation{
